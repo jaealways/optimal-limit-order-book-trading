@@ -1,4 +1,6 @@
 import numpy as np
+from scipy.optimize import minimize
+from sdepy import integrate
 
 
 def dSt(mu,dt,vt,db1,lam_p,lam_n,jump_p,jump_n):
@@ -6,9 +8,9 @@ def dSt(mu,dt,vt,db1,lam_p,lam_n,jump_p,jump_n):
     get dSt using weiner and possion process
     dSt: differential of stock price S in infinitesimal increment time t
     """
-    weiner_term=np.sqrt(vt)*db1
-    possion_term=jump_p*poisson_process(lam_p,dt)-jump_n*poisson_process(lam_n,dt)
-    return mu*dt + weiner_term + possion_term
+    weiner_term=np.sqrt(vt) * db1
+    possion_term=jump_p * poisson_process(lam_p,dt) - jump_n * poisson_process(lam_n,dt)
+    return mu * dt + weiner_term + possion_term
 
 def dvt(k,dt,sig,db2,vt,theta):
     """
@@ -16,8 +18,8 @@ def dvt(k,dt,sig,db2,vt,theta):
     dvt: differential of S in infinitesimal increment time t
 
     """
-    weiner_term=sig*np.sqrt(vt)*db2
-    return k*(theta-vt)*dt+weiner_term
+    weiner_term=sig * np.sqrt(vt) * db2
+    return k * (theta-vt) * dt+weiner_term
 
 def poisson_process(lam,dt):
     """
@@ -35,6 +37,36 @@ def wiener_process(dt,N):
 
 def jump(jump_size,dN):
     return (np.exp(jump_size) - 1) * dN
+
+def stock_price_sde():
+    pass
+
+def rate_of_execution(delta_t):
+    lambda_t = 2
+    kappa = 0.5
+    return lambda_t * np.exp(-kappa * delta_t)
+
+def utility_function(X_T, S_T, q_T, alpha):
+    eta_qT = -alpha * q_T**2
+    return X_T + q_T * S_T + eta_qT
+
+def penalty_function(q, v, T):
+    pass
+
+def target_function(delta_t):
+    U = utility_function(X_T, S_T, q_T, alpha)
+    penalty = penalty_function(q_T, v, T)
+    return U - penalty
+
+def value_function(params):
+    X_T, S_T, q_T, alpha, v, T = params
+    result = minimize(lambda delta_t: -target_function(delta_t), x0=0.0)
+    return -result.fun
+
+def get_optimal_value_function():
+    initial_params = (100, 50, 10, 0.1, 0.05, 1)
+    value = value_function(initial_params)
+    return value
 
 
 if __name__ == '__main__':
