@@ -17,19 +17,15 @@ The review within the paper tracks the development of optimal market making stra
 
 Assume the midprice $S_t$ follows dynamics below in high-frequency trading.
 
-$
-dS_t = \mu dt + \sqrt{v_t} dB_t^1 + \varepsilon^+ dM_t^+ - \varepsilon^- dM_t^-, \\
+
+$dS_t = \mu dt + \sqrt{v_t} dB_t^1 + \varepsilon^+ dM_t^+ - \varepsilon^- dM_t^-, \\
 dv_t = k(\theta - v_t)dt + \sigma \sqrt{v_t} dB_t^2, \\
-dB_t^1 dB_t^2 = \rho dt,
-$
+dB_t^1 dB_t^2 = \rho dt,$
 
 We denote <br>
-$
-B_t^1 \sim \text{Wiener}(t) \\
+$B_t^1 \sim \text{Wiener}(t) \\
 B_t^2 \sim \text{Wiener}(t) \\
-M_t^{\pm}
- \sim \text{Poisson}(\lambda)
-$
+M_t^{\pm} \sim \text{Poisson}(\lambda)$
 
 [Check the code for Market Making Optimization Problem](market_making_opt.py)
 
