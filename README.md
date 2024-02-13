@@ -16,7 +16,7 @@ The review within the paper tracks the development of optimal market making stra
 
 # A Market Making Optimization Problem in a Limit Order Book
 
-Assume the midprice $S_t$ follows dynamics below in high-frequency trading, especially in Limit Order situation.
+Suppose the midprice $S_t$ follows dynamics below in high-frequency trading, especially in Limit Order situation.
 
 ## Define terms
 
@@ -28,7 +28,6 @@ $dS_t = \mu dt + \sqrt{v_t} dB_t^1 + \varepsilon^+ dM_t^+ - \varepsilon^- dM_t^-
 $dv_t = k(\theta - v_t)dt + \sigma \sqrt{v_t} dB_t^2$<br>
 $dB_t^1 dB_t^2 = \rho dt,$
 
-<br><br>
 $B_t^1 \sim \text{Wiener Process}$<br>
 $B_t^2 \sim \text{Wiener Process}$<br>
 $M_t^{\pm} \sim \text{Poisson Process}$<br>
@@ -40,7 +39,7 @@ $\Delta q_t = q_0 + N_t^{-} - N_t^{+}, \quad q_t \in \mathbb{Z}, \quad t \in [0,
 $N_t^{\pm} \sim \text{Counting Process}$<br>
 
 ### Wealth process
-Based on inventory and stock price the cash of the traders changes. So we suppose the wealth process $X$ follows stochastic dynamics.<br>
+Based on inventory and stock price, the cash of the traders changes. So we suppose the wealth process $X$ follows stochastic dynamics.<br>
 
 $dX_t = p_t^{+} dN_t^{+} - p_t^{-} dN_t^{-}$ <br>
 $= (S_t + \delta^{+}) dN_t^{+} - (S_t - \delta^{-}) dN_t^{-}.$
@@ -52,7 +51,7 @@ $\Lambda_t^{\pm}(\delta_t^{\pm}) = \lambda_t^{\pm} e^{-\kappa_t^{\pm}\delta_t^{\
 
 ## Maximize the expected cash value
 
-Now, we can define the market maker's promblem to maximize the expected cash as a stochastic optimization problem.
+Now, we can define the market maker's problem to maximize the expected cash as a stochastic optimization problem.
 
 ### Value function
 By considering the penalty of inventories, we can maximize the expected cash value at maturity time T as following equation.<br>
@@ -67,7 +66,7 @@ $\text{Var} \left( \int_t^T q_s dS_s \right) = E\left[ \left( \int_t^T q_s dS_s 
 
 As a result, Market maker wants to maximize profits, and also wants to remove the inventory penalization.<br>
 
-[code implemenation of Market Making Optimization Problem](market_making_opt.py)
+[code implemenation of Market Making Optimization Problem](market_making_optimization.py)
 
 
 # Dynamic Programming Equation for the Value Function
